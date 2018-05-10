@@ -1,7 +1,10 @@
 # grid_code
 
 # Usage:
-Simply build with make, and run from bin directory.
+From project root:
+
+`mkdir bin && make`
+`bin/grid_code data/<input file name>`
 
 Please note that updating to the commit labelled 0e9ab6f4c17 will produce a verbose output (printing the entire grid after every byte read from input file). Running on HEAD will run the same program, but only output the number of zeros remaining after the run (as specified in the problem definition).
 
