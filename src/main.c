@@ -7,7 +7,9 @@ int main(int argc, char **argv)
 {
 	if(argc < 2)
 	{
-		printf("No input file specified. Exiting...\n");
+		printf("No input file specified. Valid example run from project root:\n");
+		printf("bin/grid_code data/infile1\n");
+		printf("Exiting..\n");
 		return 0;
 	}
     
@@ -19,6 +21,19 @@ int main(int argc, char **argv)
 	int inbyte;
 
 	unsigned char grid[GRIDSIZE];
+	grid_printGrid(grid);
+
+	unsigned int numzeros = BITSINROW * BITSINCOL;
+
+	int i,j;
+	for(i=0; i<BITSINROW; i++)
+	{
+		for(j=0; j<BITSINROW; j++)
+		{
+			grid_setBitAtCoords(0, grid, j, i);
+		}
+		printf("\n");
+	}
 
 	while(fgets(buf, MAXFILESIZE, infile))
 	{
@@ -28,10 +43,9 @@ int main(int argc, char **argv)
 
 		printf("row: %x col: %x\n", row, col);
 
-		grid_setBitAtCoords(1, grid, row, col);
-		unsigned char val = grid_getBitAtCoords(grid, row, col);
-
-		printf("lauraa: %d\n", val);
+		numzeros = grid_updateGrid(grid, row, col, numzeros);
+		grid_printGrid(grid);
+		printf("numzeros: %d\n", numzeros);
 	}
 
     return 0;
